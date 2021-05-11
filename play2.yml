@@ -1,5 +1,5 @@
 - name: Setup App server
-  hosts: "AppServer"
+  hosts: appserver
   # hosts: all
   become: yes
   tasks:

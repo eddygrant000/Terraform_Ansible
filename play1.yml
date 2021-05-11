@@ -1,5 +1,5 @@
 - name: Setup Web server
-  hosts: WebWerver
+  hosts: webserver
   # hosts: all
   become: yes
   vars_files:
