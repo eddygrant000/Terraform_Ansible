@@ -6,6 +6,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "eddygrant000"
+    region = "ap-south-1"
     key = "testenv/terraform.tfstate"
   }
 }
