@@ -10,7 +10,7 @@ resource "aws_instance" "appserver" {
     command = "echo '[appserver]' >> ./addgel"
   }
   provisioner "local-exec" {
-    command = "echo ${aws_instance.appserver.private_ip} >> ./addgel"
+    command = "echo ${aws_instance.appserver.public_ip} >> ./addgel"
   }
   provisioner "local-exec" {
     command = "echo tom_addr: ${aws_instance.appserver.private_ip} >> ./vars.yml"
