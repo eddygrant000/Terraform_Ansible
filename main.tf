@@ -10,10 +10,10 @@ resource "aws_instance" "appserver" {
     command = "echo '[appserver]' >> ./addgel"
   }
   provisioner "local-exec" {
-    command = "echo ${aws_instance.testserver2.private_ip} >> ./addgel"
+    command = "echo ${aws_instance.appserver.private_ip} >> ./addgel"
   }
   provisioner "local-exec" {
-    command = "echo tom_addr: ${aws_instance.testserver2.private_ip} >> ./vars.yml"
+    command = "echo tom_addr: ${aws_instance.appserver.private_ip} >> ./vars.yml"
   }
 
   tags = {
@@ -50,7 +50,7 @@ resource "aws_instance" "webserver" {
     command = "echo '[webserver]' >> ./addgel"
   }
   provisioner "local-exec" {
-    command = "echo ${aws_instance.testserver2.public_ip} >> ./addgel"
+    command = "echo ${aws_instance.webserver.public_ip} >> ./addgel"
   }
 
 
