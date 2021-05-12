@@ -1,6 +1,6 @@
 provider "aws" {
   region = "ap-south-1"
-  # shared_credentials_file = "/home/ubuntu/.aws/credentials"
+  shared_credentials_file = "/home/ubuntu/.aws/credentials"
 }
 
 terraform {
