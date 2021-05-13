@@ -60,20 +60,20 @@ resource "aws_instance" "webserver" {
   }
   }
 
-# resource "aws_db_instance" "db2" {
-#   identifier             = "db2"
-#   instance_class         = "db.t2.micro"
-#   allocated_storage      = 10
-#   engine                 = "mysql"
-#   name                   = "appdb"
-#   password               = var.db_password
-#   username               = var.db_username
-#   engine_version         = "8.0.23"
-#   skip_final_snapshot    = true
-#   db_subnet_group_name   = aws_db_subnet_group.default.name
-#   multi_az               = false
-#   vpc_security_group_ids = [aws_security_group.ct-db.id]
-#   tags = {
-#     "Name" = "TomcatDB"
-#   }
-# }
+resource "aws_db_instance" "db2" {
+  identifier             = "db2"
+  instance_class         = "db.t2.micro"
+  allocated_storage      = 10
+  engine                 = "mysql"
+  name                   = "appdb"
+  password               = var.db_password
+  username               = var.db_username
+  engine_version         = "8.0.23"
+  skip_final_snapshot    = true
+  db_subnet_group_name   = aws_db_subnet_group.default.name
+  multi_az               = false
+  vpc_security_group_ids = [aws_security_group.ct-db.id]
+  tags = {
+    "Name" = "TomcatDB"
+  }
+}
