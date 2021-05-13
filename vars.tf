@@ -13,15 +13,3 @@ variable "db_password" {
   type        = string
   sensitive   = true
 }
-
-# variable "username" {
-#   default = "eddygrant"
-# }
-
-# variable "password" {
-#   default = "Redhat!123"
-# }
-
-# variable "app_addr" {
-#   default     = aws_instance.appserver.private_ip
-# }

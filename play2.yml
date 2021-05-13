@@ -5,9 +5,12 @@
   tasks:
     - name: Install Java
       apt:
-        name: openjdk-11-jdk
+        name: "{{ item }}"
         update_cache: yes
         state: present
+      loop:
+        - unzip
+        - openjdk-11-jdk
 
     - name: Add User
       user:
@@ -58,6 +61,23 @@
         owner: tomcat
         recurse: yes
 
+    - name: Create a bz2 archive of multiple files, rooted at /path
+      archive:
+        path: /opt/tomcat/webapps
+        dest: /opt/webapps.tar.bz2
+        format: bz2
+
+    - name: Remove old files
+      shell: /bin/rm -rf /opt/tomcat/webapps/*
+
+    - name: Deploy application files
+      copy:
+        src: "/var/lib/jenkins/workspace/{{ jobname }}/target/java-tomcat-maven-example.war"
+        dest: /opt/tomcat
+
+    - name: Unzip files
+      shell: /bin/unzip /opt/java-tomcat-maven-example.war -d /opt/tomcat/webapps/ROOT
+    
     - name: Start tomcat
       systemd:
         state: restarted
