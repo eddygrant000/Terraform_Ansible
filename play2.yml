@@ -9,8 +9,8 @@
         update_cache: yes
         state: present
       loop:
-        - unzip
         - openjdk-11-jdk
+        - unzip
 
     - name: Add User
       user:
@@ -73,7 +73,7 @@
     - name: Deploy application files
       copy:
         src: "/var/lib/jenkins/workspace/{{ jobname }}/target/java-tomcat-maven-example.war"
-        dest: /opt/tomcat
+        dest: /opt/
 
     - name: Unzip files
       shell: /bin/unzip /opt/java-tomcat-maven-example.war -d /opt/tomcat/webapps/ROOT
