@@ -1,0 +1,29 @@
+---
+# tasks file for deploy_nginx
+- name: Install {{ package_name }} Package
+  apt:
+    name: "{{ package_name }}"
+    state: present
+    update_cache: yes
+
+- name: Create nginx configuration
+  template:
+    src: appserver.j2
+    dest: /etc/nginx/sites-available/appserver
+
+- name: Enabled new configuration
+  file:
+    src: /etc/nginx/sites-available/appserver
+    dest: /etc/nginx/sites-enabled/appserver
+    state: link
+
+- name: Delete Default configuration
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Start nginx Service
+  service:
+    name: nginx
+    state: restarted
+    enabled: yes

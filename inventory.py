@@ -8,14 +8,6 @@ def getgroupofhosts(ec2):
     allgroups = {}
     for each in ec2.instances.filter(Filters=[{"Name": 'instance-state-name', 'Values': ['running']}]):
         for tag in each.tags:
-            # if tag["Key"] in allgroups:
-            #     hosts = allgroups.get(tag["Key"])
-            #     hosts.append(each.public_ip_address)
-            #     allgroups[tag["Key"]] = hosts
-            # else:
-            #     hosts = [each.public_ip_address]
-            #     allgroups[tag["Key"]] = hosts
-            
             if tag["Value"] in allgroups:
                 hosts - allgroups.get(tag["Value"])
                 hosts.append((each.public_ip_address))

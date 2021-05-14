@@ -1,0 +1,36 @@
+---
+# tasks file for deploy_code
+- name: get current date
+  set_fact: bkpdate="{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}"
+
+- name: Send WAR to tomcat server
+  copy:
+    src: "/var/lib/jenkins/workspace/{{ jobname }}/target/{{ war_name }}"
+    dest: /tmp/
+
+- name: create directory with a date in name
+  file: 
+    path: "{{ home_directory }}/{{ bkpdate }}"
+    state: directory
+    mode: '0755'
+
+- name: backup old war file
+  archive:
+    path:  "{{ home_directory }}/webapps"
+    path: "{{ home_directory }}/{{ bkpdate }}/webapps.tar.bz2"
+    format: bz2
+
+- name: Delete remote war file
+  file: path={{ home_directory }}/webapps state=absent
+  
+- name: Unzip WAR file
+  unarchive: 
+    src: "/tmp/{{ war_name }}" 
+    dest: "{{ home_directory }}/webapps/ROOT/"
+    copy: no 
+    mode: '0755' 
+    owner: tomcat 
+    group: tomcat
+    creates: yes
+  notify:
+      - restart tomcat service

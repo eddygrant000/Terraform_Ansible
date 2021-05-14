@@ -1,0 +1,53 @@
+---
+# tasks file for deploy_tomcat
+- name: Install Java Package
+  apt:
+    name: "{{ jdk_version }}"
+    state: present
+    update_cache: yes
+
+- name: Add UserAccount
+  user:
+    name: tomcat
+    shell: /bin/false
+    home: "{{ home_directory }}"
+
+- name: Get Apache tomcat compiled file
+  get_url:
+    url: "{{ tomcat_package }}"
+    dest: /opt/
+
+- name: Uncompress Tomcat Files
+  unarchive:
+    src: "/opt/{{ tomcat_package.split('/')[-1]}}"
+    dest: "{{ home_directory }}"
+    remote_src: yes
+    extra_opts:
+      - --strip-components=1
+
+- name: Create systemd file to manage service
+  template:
+    src: tomcat.j2
+    dest: /etc/systemd/system/tomcat.service
+  notify:
+    - Start Tomcat Service
+
+- name: Change Group Ownership
+  file:
+    path: "{{ home_directory }}"
+    group: tomcat
+    owner: tomcat
+    recurse: yes
+
+- name: Give Execute Permissions
+  file:
+    path: "{{ home_directory }}/conf"
+    group: tomcat
+    mode: 'g+x'
+
+- name: Give Read Permission on files
+  file:
+    path: "{{ home_directory }}/conf"
+    group: tomcat
+    recurse: yes
+    mode: 'g+r'

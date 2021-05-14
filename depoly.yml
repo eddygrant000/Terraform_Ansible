@@ -1,0 +1,4 @@
+- name: Deploy war file over tomcat server
+  hosts: AppServer
+  roles:
+    - deploy_code

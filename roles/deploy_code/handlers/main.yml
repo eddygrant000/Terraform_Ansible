@@ -1,0 +1,6 @@
+---
+# handlers file for deploy_code
+- name: restart tomcat service
+  service:
+    name: tomcat
+    state: restarted

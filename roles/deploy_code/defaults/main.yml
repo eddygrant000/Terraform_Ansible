@@ -1,0 +1,4 @@
+---
+# defaults file for deploy_code
+home_directory: /opt/tomcat/
+war_name: java-tomcat-maven-example.war

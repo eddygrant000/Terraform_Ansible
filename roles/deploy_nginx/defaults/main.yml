@@ -1,0 +1,6 @@
+---
+# defaults file for deploy_nginx
+package_name: nginx
+remote_address: localhost
+remote_port: 8080
+nginx_listion: 80

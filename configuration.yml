@@ -1,0 +1,13 @@
+- name: Setup Nginx on web Server
+  hosts: WebServer
+  vars_files:
+    - vars.yml
+  roles:
+    - deploy_nginx
+
+- name: Setup Tomcat on App Server
+  hosts: AppServer
+  vars_files:
+    - tomcat_vars.yml
+  roles:
+    - deploy_tomcat
