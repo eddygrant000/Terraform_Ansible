@@ -1,5 +1,6 @@
 - name: Setup Nginx on web Server
   hosts: WebServer
+  become: yes
   vars_files:
     - vars.yml
   roles:
@@ -7,6 +8,7 @@
 
 - name: Setup Tomcat on App Server
   hosts: AppServer
+  become: yes
   vars_files:
     - tomcat_vars.yml
   roles:
