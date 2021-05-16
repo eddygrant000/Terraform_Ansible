@@ -22,6 +22,11 @@
 
 - name: Delete remote war file
   file: path={{ home_directory }}/webapps state=absent
+
+- name: Create path
+  file:
+    path: "{{ home_directory }}/webapps/ROOT/"
+    state: present
   
 - name: Unzip WAR file
   unarchive: 
@@ -31,6 +36,5 @@
     # mode: '0755' 
     # owner: tomcat 
     # group: tomcat
-    creates: "{{ home_directory }}/webapps/ROOT/"
   notify:
       - restart tomcat service
