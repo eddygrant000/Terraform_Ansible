@@ -31,6 +31,6 @@
     # mode: '0755' 
     # owner: tomcat 
     # group: tomcat
-    # creates: yes
+    creates: "{{ home_directory }}/webapps/ROOT/"
   notify:
       - restart tomcat service
