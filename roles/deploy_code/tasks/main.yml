@@ -27,10 +27,10 @@
   unarchive: 
     src: "/tmp/{{ war_name }}" 
     dest: "{{ home_directory }}/webapps/ROOT/"
-    copy: no 
-    mode: '0755' 
-    owner: tomcat 
-    group: tomcat
-    creates: yes
+    remote_src: true
+    # mode: '0755' 
+    # owner: tomcat 
+    # group: tomcat
+    # creates: yes
   notify:
       - restart tomcat service
