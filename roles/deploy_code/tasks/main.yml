@@ -1,5 +1,11 @@
 ---
 # tasks file for deploy_code
+- name: install required package
+  apt:
+    name: unzip
+    state: latest
+    update_cache: yes
+    
 - name: get current date
   set_fact: bkpdate="{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}"
 
