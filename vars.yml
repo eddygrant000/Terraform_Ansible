@@ -1,1 +1,1 @@
-remote_address: "{{ hostvars['AppServer'] }}"
+remote_address: 10.0.1.108
