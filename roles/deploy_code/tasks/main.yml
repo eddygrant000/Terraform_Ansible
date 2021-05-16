@@ -17,7 +17,7 @@
 - name: backup old war file
   archive:
     path:  "{{ home_directory }}/webapps"
-    path: "{{ home_directory }}/{{ bkpdate }}/webapps.tar.bz2"
+    dest: "{{ home_directory }}/{{ bkpdate }}/webapps.tar.bz2"
     format: bz2
 
 - name: Delete remote war file
